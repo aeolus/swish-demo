@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'client.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(SwishDemoApp());
 
@@ -28,11 +29,21 @@ class SwishDemoState extends State<SwishDemo> {
     });
   }
 
-  Future<Null> getToken() async {
+  Future<Null> _getToken() async {
     String token = await postWithClientCertificate();
     setState(() {
       _paymentRequestToken = token;
     });
+  }
+
+  _openSwish() async {
+    var callbackUrl = 'https://www.google.com';
+    var url = 'swish://paymentrequest?token=' + _paymentRequestToken + '&callbackurl=' + callbackUrl;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -47,13 +58,20 @@ class SwishDemoState extends State<SwishDemo> {
           child: Column(
             children: <Widget>[
               RaisedButton(
+                child: const Text('Get payment token from Swish'),
+                color: Theme.of(context).accentColor,
+                elevation: 4.0,
+                splashColor: Colors.blueGrey,
+                onPressed: _getToken,
+              ),
+              futureTokenWidgetOnButtonPress(),
+              RaisedButton(
                 child: const Text('Pay with Swish'),
                 color: Theme.of(context).accentColor,
                 elevation: 4.0,
                 splashColor: Colors.blueGrey,
-                onPressed: getToken,
+                onPressed: _openSwish,
               ),
-              futureTokenWidgetOnButtonPress()
             ],
           ),
         ),
