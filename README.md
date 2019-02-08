@@ -1,7 +1,11 @@
-# This is a documentation about in-app Swish payment flow
+# Documentation about in-app Swish payment flow
+
+Demo application for switsh payment flow under flutter
 
 
-## Overall flowchart
+## Overall flow chart
+
+
 ```mermaid
 sequenceDiagram
     App->>Swish Server: payment request (A)
@@ -12,19 +16,20 @@ sequenceDiagram
 
 ```
 
+
 ## Details
 
-### Step (A) Create payment request
-***URL*** : `/swish-cpcapi/api/v1/paymentrequests`
+### Step (A) create payment request
+**URL** : `/swish-cpcapi/api/v1/paymentrequests`
 
-***Method*** : `POST`
+**Method** : `POST`
 
-***Auth required*** : YES (client certificate)
+**Auth required** : YES (client certificate)
 
-***Payload (example)*** :
+**Payload (example)** :
 
 
-```json
+```
 {
     "payeePaymentReference": "0123456789", # Receiver of payment
     "callbackUrl": "https://example.com/api/paymentrequests", # must be https 
@@ -35,7 +40,7 @@ sequenceDiagram
 }
 ```
 
-### Step (A') Success Response 
+### Step (A') success response 
 
 ***Code** : `200 OK`
 
@@ -44,15 +49,20 @@ sequenceDiagram
 PaymentRequestToken: f34DS34lfd0d03fdDselkfd3ffk21
 ```
 
-### Step (A'') Callback for payment request
+### Step (A'') callback from Swish for payment request
 ***TODO*** : 
 
-### Step (B) Invoke Swish app with deep link
+### Step (B) invoke Swish app with deep link
 
 ```javascript
 // [deep link] 
 swish://paymentrequest?token=$_paymentRequestToken&callbackurl=$callbackUrl
 ```
 
+## Authors
 
+* **Chengwei Ding**
 
+## License
+
+## Acknowledgments
