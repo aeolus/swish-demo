@@ -1,6 +1,6 @@
 # Documentation about in-app Swish payment flow
 
-Demo application for switsh payment flow under flutter
+Demo application for Swish payment flow with [Google flutter framework](https://flutter.io/)
 
 
 ## Overall flow chart

@@ -18,6 +18,7 @@ class SwishDemoApp extends StatelessWidget {
 }
 
 class SwishDemoState extends State<SwishDemo> {
+
   String _paymentRequestToken = 'none';
 
   Widget futureTokenWidgetOnButtonPress() {
@@ -50,7 +51,7 @@ class SwishDemoState extends State<SwishDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fetch Data Example App Bar Title'),
+        title: Text('Swish Demo AppBar Title'),
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 100.0),
