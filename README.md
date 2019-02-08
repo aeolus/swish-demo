@@ -1,16 +1,58 @@
-# swish_demo
+# This is a documentation about in-app Swish payment flow
 
-A new Swish Demo application.
 
-## Getting Started
+## Overall flowchart
+```mermaid
+sequenceDiagram
+    App->>Swish Server: payment request (A)
+    Swish Server-->>App: payment token id (A')
+    Swish Server->>Callback Server: callback (A'')
+    App->>Swish Server: deep link (B)
+    Swish Server->>Callback Server: payment callback (B')
 
-This project is a starting point for a Flutter application.
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Details
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+### Step (A) Create payment request
+***URL*** : `/swish-cpcapi/api/v1/paymentrequests`
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+***Method*** : `POST`
+
+***Auth required*** : YES (client certificate)
+
+***Payload (example)*** :
+
+
+```json
+{
+    "payeePaymentReference": "0123456789", # Receiver of payment
+    "callbackUrl": "https://example.com/api/paymentrequests", # must be https 
+    "payeeAlias": "460100031456", # Receiver phone number country_code + number
+    "amount": "100",
+    "currency": "SEK", # only SEK for now  
+    "message": "Kingston USB Flash Drive 8 GB" # Max 50 chars [a-öA-Ö0-9;:,.?!()]
+}
+```
+
+### Step (A') Success Response 
+
+***Code** : `200 OK`
+
+***HEAD:***
+```bash
+PaymentRequestToken: f34DS34lfd0d03fdDselkfd3ffk21
+```
+
+### Step (A'') Callback for payment request
+***TODO*** : 
+
+### Step (B) Invoke Swish app with deep link
+
+```javascript
+// [deep link] 
+swish://paymentrequest?token=$_paymentRequestToken&callbackurl=$callbackUrl
+```
+
+
+
