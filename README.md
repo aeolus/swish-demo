@@ -1,4 +1,4 @@
-# Documentation about in-app Swish payment flow
+# Swish Demo App for in-app Swish payment flow
 
 Demo application for Swish payment flow with [Google flutter framework](https://flutter.io/)
 
@@ -42,15 +42,15 @@ sequenceDiagram
 
 ### Step (A') success response 
 
-***Code** : `200 OK`
+**Code** : `200 OK`
 
-***HEAD:***
+**HEAD:**
 ```bash
 PaymentRequestToken: f34DS34lfd0d03fdDselkfd3ffk21
 ```
 
 ### Step (A'') callback from Swish for payment request
-***TODO*** : 
+**TODO** : 
 
 ### Step (B) invoke Swish app with deep link
 
